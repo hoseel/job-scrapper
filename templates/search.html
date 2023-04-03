@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Scrapper</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css"
+    />
+    <style>
+      ::selection {
+        background-color: rgb(244, 200, 222);
+      }
+      .searchform {
+        text-align: center;
+      }
+      button {
+        border: 0;
+        background-color: hotpink;
+        width: 30%;
+        height: 50%;
+        font-size: 80%;
+        text-align: center;
+        float: right;
+      }
+      button:hover {
+        background-color: rgb(227, 34, 131);
+      }
+      .back {
+        float: right;
+        text-align: right;
+        font-size: 14pt;
+      }
+      a {
+        color: rgb(227, 34, 131);
+      }
+      .top {
+        display: flex;
+        justify-content: center;
+        font-size: 14pt;
+      }
+      input {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <a class="back" target="_self" href="/">🏠home</a>
+      <form action="/search" class="searchform">
+        <h3>Search more!</h3>
+        <input type="text" name="keyword" placeholder="Write JOB Keyword!" />
+        <button>Search</button>
+      </form>
+      <hgroup>
+        <br />
+        <h1>Results for "{{keyword}}" :</h1>
+        <a target="_blank" href="/export?keyword={{keyword}}">📑Export File</a>
+      </hgroup>
+      <figure>
+        <table role="grid">
+          <thead>
+            <tr>
+              <th width="45%">Position</th>
+              <th width="25%">Company</th>
+              <th width="25%">Location</th>
+              <th width="15%">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for job in jobs %}
+            <tr>
+              <td>{{job.position}}</td>
+              <td>{{job.company}}</td>
+              <td>{{job.location}}</td>
+              <td><a href="{{job.link}}" target="_blank">Apply!</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </figure>
+      <a class="top" target="_self" href="#top">🔺Go To Top🔺</a>
+    </main>
+  </body>
+</html>
